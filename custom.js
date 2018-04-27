@@ -7,7 +7,6 @@ function deleteDblChar(string) {                              //function to dele
     }
     dblCharacterOutput.innerHTML = newString.replace(/ /g, '');
 }
-
 function palindrome(string) {                               // function to check palindrome
     var re = /[^A-Za-z0-9]/g;
     string = string.toLowerCase().replace(re, '');
@@ -15,6 +14,7 @@ function palindrome(string) {                               // function to check
     for (var i = 0; i < len/2; i++) {
       if (string[i] !== string[len - 1 - i]) {
         palindromeoutput.innerHTML = false;
+        return false;
       }
     }
     palindromeoutput.innerHTML = true;
