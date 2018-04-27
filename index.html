@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>::Exercise::</title>
+    <!-- Documentation extras -->
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Exercise</h1>
+    </header>
+    <div class="content">
+        <section class="contentBox">
+            <h2>Javascript Exercise</h2>
+            <section id="js-1" class="exercise">
+                <label>Delete Double character:</label>
+                <input type="text" id="removedblCharacter">
+                <button  class="btn-primary" onclick="deleteDblChar(document.getElementById('removedblCharacter').value)">Submit</button>
+                <span id="dblCharacterOutput" class="outputText"></span>
+            </section>
+            <section id="js-2" class="exercise">
+                <label>Check Palindrome:</label>
+                <input type="text" id="palindromeText">
+                <button  class="btn-primary" onclick="palindrome(document.getElementById('palindromeText').value)">Submit</button>
+                <span id="palindromeoutput" class="outputText"></span>
+            </section>
+            <section id="js-3" class="exercise">
+                <label>Compare Array</label>
+                <input type="text" id="array1">
+                <input type="text" id="array2">
+                <button  class="btn-primary" onclick="compareArray(document.getElementById('array1').value, document.getElementById('array2').value)">Submit</button>
+                <span id="comparedArrayData" class="outputText"></span>
+            </section>
+        </section>
+        <section class="contentBox">
+            <h2>Angular JS Exercise</h2>
+            <div ng-app="mainApp" data-ng-controller="CRUDController">
+                <form  name="myForm"> 
+                    <div class="form-row">
+                        <label>NickName:</label>
+                        <input type="text" name="Name" data-ng-model="EmpModel.Name" required/>
+                        <span class="warning" ng-show="myForm.Name.$touched && myForm.Name.$invalid">NickName is required.</span>
+                    </div>
+                    <div class="form-row">
+                        <label>Email Address:</label>
+                        <input type="email" name="Email" data-ng-model="EmpModel.Email" required/>
+                        <span class="warning" ng-show="myForm.Email.$touched && myForm.Email.$invalid">Email is required.</span>
+                    </div>
+                    <div class="form-row">
+                        <label>Phone Number:</label>
+                        <input type="number" name="Number" data-ng-model="EmpModel.Number" required/>
+                        <span class="warning" ng-show="myForm.Number.$touched && myForm.Number.$invalid">Only Number is acceptable</span>
+                    </div>
+                    <div class="form-row">
+                        <label>Description:</label>
+                        <textarea  ng-class="{ red: (100 - EmpModel.Description.length) == 0 }"  type="description" name="Description" data-ng-model="EmpModel.Description" required rows="5" maxlength=100></textarea><span  name="charCount">{{ 100 - EmpModel.Description.length }}</span>
+                        <span class="warning" ng-show="myForm.Description.$touched && myForm.Description.$invalid">Description is required.</span>
+                    </div>
+                    <div class="form-row">
+                        <input type="button" class="btn-primary" value="Save Data" ng-disabled="myForm.$invalid" data-ng-click="AddData( )"/>
+                        <input type="button" class="btn-primary" value="Update Data" ng-disabled="myForm.$invalid" data-ng-click="UpdateData()" />
+                    </div>
+                    <table border="1">  
+                        <thead>  
+                            <th>Id</th>
+                            <th>NickName</th>  
+                            <th>Email Address</th>  
+                            <th>Phone Number</th>
+                            <th>Description</th>  
+                            <th>Action</th>
+                        </thead>  
+                        <tr data-ng-repeat="Emp in EmpList"  data-ng-click="BindSelectedData(Emp)">
+                            <td>{{ Emp.Id }}</td> 
+                            <td>{{ Emp.Name }}</td>  
+                            <td>{{ Emp.Email }}</td>  
+                            <td>{{ Emp.Number }}</td>
+                            <td><span>{{ Emp.Description }}</span></td>
+                            <td><input type="button" class="btn-primary"value="Delete" data-ng-click="DeleteData(Emp)" /></td>    
+                        </tr>  
+                    </table> 
+                </form>
+            </div>
+        </section>        
+    </div>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript">  
+        var app = angular.module("mainApp", ['ngAnimate']);  
+        app.controller('CRUDController', function ($scope) {  
+
+            $scope.EmpModel = {  
+                Id: 0,
+                Name: '',
+                Email: '',  
+                Number: '',
+                Description: '' 
+            };  
+
+            $scope.EmpList = [];  
+            $scope.AddData = function () {  
+                var _emp = {
+                    Id: $scope.EmpList.length + 1,    
+                    Name: $scope.EmpModel.Name,
+                    Email: $scope.EmpModel.Email,  
+                    Number: $scope.EmpModel.Number,
+                    Description: $scope.EmpModel.Description 
+                }; 
+                $scope.EmpList.push(_emp);  
+                ClearModel();                
+            }  
+
+            function ClearModel() { 
+                $scope.EmpModel.Id = 0;  
+                $scope.EmpModel.Name = '';
+                $scope.EmpModel.Email = '';
+                $scope.EmpModel.Number = '';
+                $scope.EmpModel.Description = '';
+            } 
+
+            $scope.DeleteData = function (emp) {   
+                var _index = $scope.EmpList.indexOf(emp);  
+                $scope.EmpList.splice(_index, 1);  
+                ClearModel();
+            } 
+
+            $scope.BindSelectedData = function (emp) {  
+                $scope.EmpModel.Id = emp.Id; 
+                $scope.EmpModel.Name = emp.Name; 
+                $scope.EmpModel.Email = emp.Email; 
+                $scope.EmpModel.Number = emp.Number;
+                $scope.EmpModel.Description = emp.Description;
+            } 
+            
+            $scope.UpdateData = function () {  
+                $.grep($scope.EmpList, function (e) {  
+                    if (e.Id == $scope.EmpModel.Id) {  
+                        e.Name = $scope.EmpModel.Name;  
+                        e.Email = $scope.EmpModel.Email; 
+                        e.Number = $scope.EmpModel.Number;  
+                        e.Description   = $scope.EmpModel.Description; 
+                    }  
+                });  
+                ClearModel();  
+            }  
+            function ClearModel() {  
+                $scope.EmpModel.Name = '';
+                $scope.EmpModel.Email = '';  
+                $scope.EmpModel.Number = '';
+                $scope.EmpModel.Description = ''; 
+            }  
+
+        });  
+    </script> 
+</body>
+</html>

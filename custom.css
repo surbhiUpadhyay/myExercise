@@ -1,0 +1,92 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif; }
+
+header {
+  background: #333;
+  color: #fff;
+  position: relative;
+  text-align: center; }
+  header h1 {
+    margin: 0;
+    padding: 20px 10px; }
+
+.content .contentBox {
+  width: 100%;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+  display: inline-block;
+  box-sizing: border-box; }
+.content .exercise {
+  width: 100%;
+  display: inline-block; }
+.content label {
+  width: 200px;
+  float: left; }
+.content input {
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 2px 5px;
+  width: 160px;
+  height: 20px;
+  float: left;
+  margin: 0 5px; }
+  .content input:focus, .content input:focus {
+    outline: none; }
+.content textarea {
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 2px 5px;
+  width: 160px;
+  float: left;
+  margin: 0 5px; }
+  .content textarea:focus, .content textarea:focus {
+    outline: none; }
+.content .btn-primary {
+  background: #333;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px 15px;
+  float: left;
+  border: none;
+  margin: 0 5px;
+  height: 30px;
+  cursor: pointer; }
+  .content .btn-primary:disabled {
+    opacity: .5;
+    cursor: default; }
+.content .outputText {
+  padding: 2px 5px;
+  width: 160px;
+  float: left;
+  height: 20px;
+  margin: 0 5px;
+  border-bottom: 1px solid #333; }
+.content .form-row {
+  width: 100%;
+  float: left;
+  padding: 0 0 10px; }
+.content .warning {
+  color: #f00;
+  font-size: 60%; }
+.content table {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: scroll;
+  border: 1px solid #333; }
+  .content table th, .content table td {
+    padding: 5px; }
+  .content table span {
+    word-break: break-all;
+    width: 100%;
+    display: inline-block; }
+.content .ng-show {
+  -webkit-transition: all ease 1s;
+  -moz-transition: all ease 1s;
+  -o-transition: all ease 1s;
+  transition: all ease 5s; }
+.content .red {
+  color: #f00; }
+
+/*# sourceMappingURL=custom.css.map */
